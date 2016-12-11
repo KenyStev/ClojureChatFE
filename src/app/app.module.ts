@@ -14,6 +14,7 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './components/home/home.component';
+import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import {NavBarComponent} from './components/subcomponents/navbar/navbar.component';
 //import {} from './components/.component';
 
@@ -36,7 +37,8 @@ const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    ChatroomComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
