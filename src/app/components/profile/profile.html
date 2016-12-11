@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row profile">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<img src="assets/img/user.png" class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						{{model.realname}} [ {{model.username}} ]
+					</div>
+					<div class="profile-usertitle-job">
+						{{model.email}}
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
+				<div class="profile-userbuttons">
+					<button type="button" class="btn btn-success btn-sm">Add as friend</button>
+					<button type="button" class="btn btn-warning btn-sm">Write Message</button>
+					<a class="btn btn-info" [routerLink]="['/settings']">Edit Profile</a>
+				</div>
+				<!-- END MENU -->
+			</div>
+		</div>
+	</div>
+</div>

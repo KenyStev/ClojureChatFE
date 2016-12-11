@@ -17,15 +17,53 @@ export class UsersService{
 		this.session = new SessionService();
 	}
 
+	getAll(){
+		let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+  		return this._http.get(this.url, {headers: headers})
+  			.map(res => {return res.json()})
+	}
+
+	getUser(email: string){
+		let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+  		return this._http.get(this.url + "/" + email, {headers: headers})
+  			.map(res => {return res.json()})
+	}
+
 	login(user: User){
 		let headers = new Headers();
-  		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  		headers.append('Content-Type', 'application/json');
 		let options = new RequestOptions({ headers: headers });
 		var params = JSON.stringify(user);
-		return this._http.post(this.url + "/login", params, {
-		headers: headers
-		})
-			.map(res => {this.session.setSession(res.json());});
+		return this._http.post(this.url + "/login", params, {headers: headers})
+			.map(res => {this.session.setSession(res.json());return res.json()});
+	}
+
+	create(user: User){
+		let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+		let options = new RequestOptions({ headers: headers });
+		var params = JSON.stringify(user);
+		return this._http.post(this.url, params, {headers: headers})
+			.map(res => {return res.json()});
+	}
+
+	update(id: string, user: User){
+		let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+		let options = new RequestOptions({ headers: headers });
+		var params = JSON.stringify(user);
+		return this._http.put(this.url + "/" + id, params, {headers: headers})
+			.map(res => {return res.json()});
+	}
+
+	delete(id: string){
+		let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+		let options = new RequestOptions({ headers: headers });
+		return this._http.delete(this.url + "/" + id, {headers: headers})
+			.map(res => {return res.json()});
 	}
     
 }

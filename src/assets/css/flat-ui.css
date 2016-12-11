@@ -4322,7 +4322,7 @@ select[multiple].navbar-form .select2-search input[type="text"] {
 }
 @media (min-width: 768px) {
   .navbar-form .input-group {
-    width: 195px;
+    width: 295px;
   }
 }
 @media (max-width: 767px) {

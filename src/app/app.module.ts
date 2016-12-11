@@ -16,13 +16,24 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './components/home/home.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import {NavBarComponent} from './components/subcomponents/navbar/navbar.component';
+import {MessagesStandComponent} from './components/subcomponents/messages_stand/messages_stand.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {SettingsComponent} from './components/settings/settings.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {UsersSearchComponent} from './components/subcomponents/users-search/usersearch.component';
 //import {} from './components/.component';
 
 import {ToasterModule, ToasterService} from 'angular2-toaster/angular2-toaster';
 import {EventsEmitter} from './services/event-emitter.service';
+import {UsersService} from './services/users.service';
 import {SessionService} from './services/session.service';
+import {MessagesService} from './services/messages.service';
 
 //import {} from './services/.service';
+
+import {FilterArrayPipeExactly} from './pipes/filter/filter.component';
+import {OrderBy} from './pipes/sortby/orderby.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -38,7 +49,14 @@ const APP_PROVIDERS = [
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    LoginComponent,
+    RegisterComponent,
+    MessagesStandComponent,
+    FilterArrayPipeExactly,
+    ProfileComponent,
+    SettingsComponent,
+    UsersSearchComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -52,7 +70,9 @@ const APP_PROVIDERS = [
     APP_PROVIDERS,
     EventsEmitter,
     ToasterService,
-    SessionService
+    SessionService,
+    UsersService,
+    MessagesService
   ]
 })
 export class AppModule {

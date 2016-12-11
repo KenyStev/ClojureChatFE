@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Session} from '../structures/structures';
+import {User} from '../structures/structures';
 
 @Injectable()
 export class SessionService{
 
-	session: Session = new Session('','','','','');
+	session: User = new User('','','','');
 	
 	constructor(){
 		var session = JSON.parse(sessionStorage.getItem('token'));
@@ -14,7 +14,7 @@ export class SessionService{
 			this.session = session;
 	}
 
-	setSession(session: Session){
+	setSession(session: User){
 		this.session = session;
 		sessionStorage.setItem('token', JSON.stringify(session));
 	}
@@ -24,12 +24,16 @@ export class SessionService{
 		if(session)
 			this.session = session;
 		else
-			this.session = new Session('','','','','');
+			this.session = new User('','','','');
 		return this.session;
 	}
 
 	deleteSession(){
 		sessionStorage.removeItem('token');
-		this.session = new Session('','','','','');
+		this.session = new User('','','','');
+	}
+
+	hasSession(){
+		return this.getSession().email != "";
 	}
 }

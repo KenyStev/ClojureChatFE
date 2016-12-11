@@ -1,0 +1,27 @@
+<style type="text/css" media="screen">
+  .users-search{
+    position: absolute; 
+    margin-left: -425px; 
+    margin-top: 40px; 
+    background-color: #2f4154; 
+    width: 450px; 
+    color: white; 
+    z-index: 10; 
+    border-bottom-left-radius: 5px; 
+    border-bottom-right-radius: 5px
+  }  
+</style>
+
+<div [hidden]="searched == ''" class="users-search">
+	<div class="col-md-12" style="margin-bottom: 5px; border-bottom: 2px solid #2ECC71" *ngFor="let user of users | filtere: searched">
+		<div class="col-md-4">
+			<img src="assets/img/user.png" width="100%" />
+		</div>
+		<div class="col-md-8">
+			<h6>{{user.realname}} [{{user.username}}]</h6>
+			<a style="padding: 4px" [routerLink]="['/profile']">Add</a>
+			<a style="padding: 4px" [routerLink]="['/profile']">Message</a>
+			<a style="padding: 4px" [routerLink]="['/profile']">Profile</a>
+		</div>
+	</div>
+</div>

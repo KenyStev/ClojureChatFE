@@ -1,6 +1,5 @@
 export class User{
 	constructor(
-		public id: string,
 		public email: string,
 		public username: string,
 		public password: string,
@@ -9,12 +8,12 @@ export class User{
 	}
 }
 
-export class Session{
+export class Message{
 	constructor(
 		public id: string,
-		public username: string,
-		public email: string,
-		public password: string,
-		public realname: string
+		public from_who: string,
+		public to_who: string,
+		public message: string,
+		public sent: Date
 	){}
 }
