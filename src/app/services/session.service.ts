@@ -6,7 +6,7 @@ import {Session} from '../structures/structures';
 @Injectable()
 export class SessionService{
 
-	session: Session = new Session('','','', new Date());
+	session: Session = new Session('','','','','');
 	
 	constructor(){
 		var session = JSON.parse(sessionStorage.getItem('token'));
@@ -24,12 +24,12 @@ export class SessionService{
 		if(session)
 			this.session = session;
 		else
-			this.session = new Session('','','',new Date());
+			this.session = new Session('','','','','');
 		return this.session;
 	}
 
 	deleteSession(){
 		sessionStorage.removeItem('token');
-		this.session = new Session('','','',new Date());
+		this.session = new Session('','','','','');
 	}
 }
