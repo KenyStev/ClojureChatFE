@@ -1,13 +1,31 @@
 <div class="col-sm-9 message_section">
     <div class="row">
-        <div class="new_message_head">
+        <!--<div class="new_message_head">
             <div class="pull-left"><button data-toggle="modal" data-target="#newMessage"><i class="fa fa-plus-square-o" aria-hidden="true"></i> New Message</button></div>
             <div class="pull-right">
                 <div class="dropdown">
                 </div>
             </div>
         </div>
-        <!--new_message_head-->
+
+        
+        new_message_head-->
+        <div class="message_write">
+            <form (ngSubmit)="sendMessage()">
+                <div class="col-md-11">
+                    <input type="text" class="form-control" [(ngModel)]="model.message" [ngModelOptions]="{standalone: true}" placeholder="type a message"/>
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" class="pull-right btn btn-success" value="Send" />
+                </div>
+                
+                <!--
+                <div class="chat_bottom"><a href="#" class="pull-left upload_btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                            Add Files</a>
+                    
+                </div> -->
+            </form>
+        </div>
 
         <div class="chat_area">
             <ul class="list-unstyled">
@@ -21,19 +39,13 @@
                     </div>
                 </li>
             </ul>
+            <input id="lastMessage" hidden/>
         </div>
         <!--chat_area-->
-        <div class="message_write">
-            <textarea class="form-control" placeholder="type a message"></textarea>
-            <div class="clearfix"></div>
-            <div class="chat_bottom"><a href="#" class="pull-left upload_btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-						Add Files</a>
-                <a href="#" class="pull-right btn btn-success">
-							Send</a></div>
-        </div>
     </div>
 </div>
 <!--message_section-->
+<a href="#lastMessage" id="setFocusOnLastMessage" hidden>Go To Middle</a>
 
 <div class="modal fade" id="newMessage" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -43,7 +55,7 @@
                 <h4 class="modal-title">Send a new message</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" (ngSubmit)="sendMessage()">
+                <form class="form-horizontal" (ngSubmit)="sendNewMessage()">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">To: </label>
                         <div class="col-sm-9">
@@ -72,3 +84,9 @@
 </div>
 <!-- /.modal -->
 <toaster-container></toaster-container>
+
+<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("lastMessage").scrollHeight;
+    };
+</script>

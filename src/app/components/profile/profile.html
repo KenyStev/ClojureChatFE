@@ -10,10 +10,13 @@
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						{{model.realname}} [ {{model.username}} ]
+						{{model.realname}}
 					</div>
 					<div class="profile-usertitle-job">
 						{{model.email}}
+					</div>
+					<div class="profile-usertitle-job">
+						[ {{model.username}} ]
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -21,7 +24,7 @@
 				<div class="profile-userbuttons">
 					<button type="button" class="btn btn-success btn-sm">Add as friend</button>
 					<button type="button" class="btn btn-warning btn-sm">Write Message</button>
-					<a class="btn btn-info" [routerLink]="['/settings']">Edit Profile</a>
+					<a *ngIf="session.email == model.email" class="btn btn-info" [routerLink]="['/settings']">Edit Profile</a>
 				</div>
 				<!-- END MENU -->
 			</div>

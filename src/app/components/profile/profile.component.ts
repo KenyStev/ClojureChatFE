@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {SessionService} from '../../services/session.service';
 import {User} from '../../structures/structures';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
 	selector: 'profile-cmp',
@@ -11,12 +12,16 @@ export class ProfileComponent implements OnInit {
 	public model : User;
 	public session : User;
 
-	constructor(private _users: UsersService, private _session: SessionService) { 
+	constructor(private _users: UsersService, private _session: SessionService, private _params: ActivatedRoute) { 
 		this.model = new User('','','','');
 	}
 
 	ngOnInit() {
-		this._users.getUser(this._session.getSession().email).subscribe(
+		var email = "";
+		this._params.params.subscribe(
+            params => email = params['email']
+        );
+		this._users.getUser(email).subscribe(
 			res => {this.model = res}
 		);
 

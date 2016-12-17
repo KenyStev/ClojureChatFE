@@ -15,6 +15,8 @@ export class MessagesService{
 	}
 
     getMessagesBetween(user1: string, user2: string){
+    	if(user2 == "none")
+    		return Observable.of(null);
         let headers = new Headers();
   		headers.append('Content-Type', 'application/json');
         return this._http.get(this.url + "/between/" + user1 + "/" + user2, {headers: headers})

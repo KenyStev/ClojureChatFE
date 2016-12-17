@@ -21,7 +21,7 @@
 			<h6>{{user.realname}} [{{user.username}}]</h6>
 			<a style="padding: 4px" [routerLink]="['/profile']">Add</a>
 			<a style="padding: 4px" [routerLink]="['/profile']">Message</a>
-			<a style="padding: 4px" [routerLink]="['/profile']">Profile</a>
+			<a style="padding: 4px" [routerLink]="['/profile', user.email]">Profile</a>
 		</div>
 	</div>
 </div>

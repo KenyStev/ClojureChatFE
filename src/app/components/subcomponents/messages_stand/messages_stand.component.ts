@@ -21,11 +21,17 @@ export class MessagesStandComponent implements OnInit {
         this.model = new Message('','','','', new Date());
     }
 
+    setScroll(){
+        {alert("Friend Change"); 
+        document.getElementById('lastMessage').scrollHeight;}
+    }
+
     ngOnInit() {
         this.model.from_who = this.user;
-        this.getMessages$.subscribe(t => {
-            this.messages = t;
-        });
+            this.getMessages$.subscribe(t => {
+                this.messages = t;
+            });
+        
         //alert(new Date().toDateString());
     }
 
@@ -37,11 +43,28 @@ export class MessagesStandComponent implements OnInit {
     .switchMap(r => this._messages.getMessagesBetween(this.user, this.friend))
     .repeat();
 
-    sendMessage(){
+    sendNewMessage(){
+        this.model.sent = new Date();
         this._messages.create(this.model).subscribe(
             res => {this.messageSent()},
             err => {this._toaster.pop("error", "", err);}
             );
+    }
+
+    ngOnChange(changes: any){
+        alert("algo cambio");
+    }
+
+    sendMessage(){
+        if (this.friend == "")
+            return;
+        this.model.sent = new Date();
+        this.model.to_who = this.friend;
+        this._messages.create(this.model).subscribe(
+            res => {this.messageSent()},
+            err => {this._toaster.pop("error", "", err);}
+            );
+        this.model.message = "";
     }
 
     messageSent(){

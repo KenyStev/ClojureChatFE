@@ -14,21 +14,23 @@
 					</div>
 					<div class="member_list">
 						<ul class="list-unstyled">
-							<li class="left clearfix" *ngFor="let user of users">
+							<li class="left clearfix" *ngFor="let user of messages_with">
+								<a (click)="selected = user.email" style="text-decoration: none">
 								<span class="chat-img pull-left">
 									<img src="assets/img/user.png" alt="User Avatar" class="img-circle">
 								</span>
 								<div class="chat-body clearfix">
 									<div class="header_sec">
-										<strong class="primary-font">{{user}}</strong> <strong class="pull-right">Fecha</strong>
+										<strong class="primary-font">{{user.realname}}</strong> <strong class="pull-right">0</strong>
 									</div>
 								</div>
+								</a>
 							</li>
 						</ul>
 					</div></div>
 				</div>
 				<!--chat_sidebar-->
-				<msg-stand-cmp [user]="'rnexer@gmail.com'" [friend]="'keny@gmail.com'"></msg-stand-cmp>
+				<msg-stand-cmp [user]="me" [friend]="selected"></msg-stand-cmp>
 
 				
 			</div>

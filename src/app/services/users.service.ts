@@ -66,4 +66,10 @@ export class UsersService{
 			.map(res => {return res.json()});
 	}
     
+    getMyChats(email: string){
+    	let headers = new Headers();
+  		headers.append('Content-Type', 'application/json');
+  		return this._http.get('http://localhost:8000/chats/' + email, {headers: headers})
+  			.map(res => {return res.json()})
+    }
 }

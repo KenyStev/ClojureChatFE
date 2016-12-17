@@ -16,6 +16,6 @@ export const ROUTES: Routes = [
   { path: 'register',  component: RegisterComponent },
   { path: 'chatroom',  component: ChatroomComponent },
   { path: 'settings',  component: SettingsComponent },
-  { path: 'profile',  component: ProfileComponent },
+  { path: 'profile/:email',  component: ProfileComponent },
   { path: '**', redirectTo: 'home'}
 ];

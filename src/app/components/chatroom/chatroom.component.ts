@@ -1,28 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-
+import {UsersService} from '../../services/users.service';
+import {SessionService} from '../../services/session.service';
 
 @Component({
 	selector: 'chatroom-cmp',
 	templateUrl: './chatroom.html'
 })
 export class ChatroomComponent implements OnInit {
-	public users = [];
+	public messages_with = [];
+	public me: string = "";
+	public selected: string = "none";
 
-	constructor() { }
+	constructor(private _users: UsersService, private _session: SessionService) { }
 
 	ngOnInit() {
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
-		this.users.push("Nexer");
+		this.me = this._session.getSession().email;
+		this._users.getMyChats(this.me).subscribe(
+			res => {this.messages_with = res}
+		);
 	}
 
 }
