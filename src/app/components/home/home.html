@@ -1,6 +1,7 @@
-<div class="container">
+<div *ngIf="!hasSession" class="container">
     <h3>
         <i class="fa fa-address-book" aria-hidden="true"></i>
         Clojure Chat by Nexer Rodriguez and Kevin Estevez
     </h3>
 </div>
+<chatroom-cmp *ngIf="hasSession"></chatroom-cmp>

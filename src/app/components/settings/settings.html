@@ -3,31 +3,31 @@
 		<div class="col-md-12">
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
-				<form action="settings_submit" method="get" accept-charset="utf-8">
+				<div class="col-md-6 col-md-offset-3 profile-userpic" style="margin-bottom: 10px">
+					<img src="{{imgUrl}}" class="img-responsive img-circle" style="border: 5px solid #BDC3C7">
+				</div>
+				<form (ngSubmit)="updateProfilePicture()" class="col-md-6 col-md-offset-3" style="padding-bottom: 20px">
+					<label>Select profile picture</label>
+					<div class="input-group image-preview" style="margin-bottom: 10px">
+						<input type="text" class="form-control image-preview-filename" [(ngModel)]="img" [ngModelOptions]="{standalone: true}" disabled="disabled" required> <!-- don't give a name === doesn't send on POST/GET -->
+						<span class="input-group-btn">
+							<div class="btn btn-default image-preview-input">
+								<span class="glyphicon glyphicon-folder-open"></span>
+								<span class="image-preview-input-title">Browse</span>
+								<input #img_val type="file" (change)="img = img_val.files[0].name; newImg = img_val.files[0]" accept="image/png, image/jpeg, image/gif" name="profileImage" class="btn btn-inverse" /> <!-- rename it -->
+							</div>
+							<input type="text" [hidden]="true" class="" name="email" [(ngModel)]="originalEmail" [ngModelOptions]="{standalone: true}">
 
-					<div class="col-md-6 col-md-offset-3 profile-userpic" style="margin-bottom: 10px">
-						<img src="assets/img/user.png" class="img-responsive img-circle" style="cursor: pointer; border: 5px solid #BDC3C7" (click)="doSomething()">
+						</span>
+						
 					</div>
+					<div align="center" style="float: none">
+						<input type="submit" class="btn btn-primary submit" value="Save Picture">
+					</div>
+				</form>
+				<form accept-charset="utf-8" (ngSubmit)="updateProfile()">
 					<div class="col-md-12">
 						<div class="col-md-6 col-md-offset-3" style="margin-bottom: 25px">
-							<label>Select profile picture</label>
-							<div class="input-group image-preview" style="margin-bottom: 10px">
-								<input type="text" class="form-control image-preview-filename" [(ngModel)]="img" [ngModelOptions]="{standalone: true}" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-								<span class="input-group-btn">
-									<!-- image-preview-clear button -->
-									<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-										<span class="glyphicon glyphicon-remove"></span> Clear
-									</button>
-									<!-- image-preview-input -->
-									<div class="btn btn-default image-preview-input">
-										<span class="glyphicon glyphicon-folder-open"></span>
-										<span class="image-preview-input-title">Browse</span>
-										<input #img_val type="file" (change)="img = img_val.files[0].name" accept="image/png, image/jpeg, image/gif" name="input-file-preview" class="btn btn-inverse" /> <!-- rename it -->
-									</div>
-
-								</span>
-								
-							</div>
 							<label>Real Name</label>
 							<input type="text" name="realname" [(ngModel)]="model.realname" [ngModelOptions]="{standalone: true}" class="form-control" style="margin-bottom: 10px" required>
 
@@ -48,3 +48,17 @@
 		</div>
 	</div>
 </div>
+
+<toaster-container></toaster-container>
+
+<script type="text/javascript">
+	document.ready = function(){
+		$('.submit').click(function () {
+		if (confirm("sending form");){
+			$('#changeProfilePicture').submit();
+        	return false;
+		}
+		return false;
+	});
+	}
+</script>

@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class EventsEmitter{
 	private sessionChange: Subject<string> = new Subject<string>();
-	private foldersChange: Subject<string> = new Subject<string>();
+	private toChange: Subject<string> = new Subject<string>();
 	
 	constructor(){
 
@@ -20,11 +20,11 @@ export class EventsEmitter{
 		return this.sessionChange.asObservable();
 	}
 
-	createFoldersEvents(name: string){
-		this.foldersChange.next(name);
+	createToEvent(name: string){
+		this.toChange.next(name);
 	}
 
-	getFoldersEvents(){
-		return this.foldersChange.asObservable();
+	getToEvent(){
+		return this.toChange.asObservable();
 	}
 }

@@ -14,6 +14,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   template: `	<nav-cmp></nav-cmp>
   				<router-outlet></router-outlet>
+  				<new-msg-cmp></new-msg-cmp>
              `,
   styleUrls: ['../assets/css/flat-ui.css']
 })

@@ -22,6 +22,9 @@ import {RegisterComponent} from './components/register/register.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {UsersSearchComponent} from './components/subcomponents/users-search/usersearch.component';
+import {NewMessagesComponent} from './components/subcomponents/new_message/new_message.component';
+import {RoomsComponent} from './components/rooms/rooms.component';
+import {EmojisComponent} from './components/emojis/emojis.component';
 //import {} from './components/.component';
 
 import {ToasterModule, ToasterService} from 'angular2-toaster/angular2-toaster';
@@ -29,6 +32,9 @@ import {EventsEmitter} from './services/event-emitter.service';
 import {UsersService} from './services/users.service';
 import {SessionService} from './services/session.service';
 import {MessagesService} from './services/messages.service';
+import {FriendsService} from './services/friends.service';
+import {RoomsService} from './services/rooms.service';
+import {EmojisService} from './services/emojis.service';
 
 //import {} from './services/.service';
 
@@ -56,7 +62,10 @@ const APP_PROVIDERS = [
     FilterArrayPipeExactly,
     ProfileComponent,
     SettingsComponent,
-    UsersSearchComponent
+    UsersSearchComponent,
+    NewMessagesComponent,
+    RoomsComponent,
+    EmojisComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -72,7 +81,10 @@ const APP_PROVIDERS = [
     ToasterService,
     SessionService,
     UsersService,
-    MessagesService
+    MessagesService,
+    FriendsService,
+    RoomsService,
+    EmojisService
   ]
 })
 export class AppModule {

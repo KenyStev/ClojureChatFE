@@ -1,5 +1,5 @@
 <div class="col-sm-9 message_section">
-    <div class="row">
+    <div *ngIf="friend != 'none'" class="row">
         <!--<div class="new_message_head">
             <div class="pull-left"><button data-toggle="modal" data-target="#newMessage"><i class="fa fa-plus-square-o" aria-hidden="true"></i> New Message</button></div>
             <div class="pull-right">
@@ -9,21 +9,27 @@
         </div>
 
         
-        new_message_head-->
+        new_message_head
+        {{friend}} - {{user}} - {{type}}-->
         <div class="message_write">
             <form (ngSubmit)="sendMessage()">
-                <div class="col-md-11">
+                <div class="col-md-10">
                     <input type="text" class="form-control" [(ngModel)]="model.message" [ngModelOptions]="{standalone: true}" placeholder="type a message"/>
+                </div>
+                <div class="col-md-1">
+                    <span class="input-group-btn">
+                        <div class="btn btn-default image-preview-input" style="border-radius: 5px">
+                            <span class="fui-clip" aria-hidden="true"></span>
+                            <input #img_val type="file" (change)="sendImage(img_val.files[0])" accept="image/png, image/jpeg, image/gif" name="profileImage" class="btn btn-inverse" /> <!-- rename it -->
+                        </div>
+
+                    </span>
                 </div>
                 <div class="col-md-1">
                     <input type="submit" class="pull-right btn btn-success" value="Send" />
                 </div>
                 
-                <!--
-                <div class="chat_bottom"><a href="#" class="pull-left upload_btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                            Add Files</a>
-                    
-                </div> -->
+                <!--(change)="img = img_val.files[0].name; newImg = img_val.files[0]"-->
             </form>
         </div>
 
@@ -31,11 +37,18 @@
             <ul class="list-unstyled">
                 <li class="left clearfix {{message.from_who == user ? 'admin_chat' : ''}}" *ngFor="let message of messages">
                     <span class="chat-img1 {{message.from_who == user ? 'pull-right' : 'pull-left'}}">
-								<img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
+								<img src="http://localhost:8000/profile-picture/{{message.from_who}}" alt="User Avatar" class="img-circle">
 							</span>
                     <div class="chat-body1 clearfix">
-                        <p>{{message.message}}</p>
-                        <div class="chat_time {{message.from_who == user ? 'pull-right' : 'pull-left'}}">{{message.sent | date:"MM/dd/yy hh:mm"}}</div>
+                        <p *ngIf="!isImage(message.message) && !isEmoji(message.message)">{{message.message}}</p>
+                        <div class="row" *ngIf="isImage(message.message)">
+                            <img style="float: right; margin-right: 5px; margin-left: 5px; margin-bottom: 5px; max-width: 90%" src="{{messageToImage(message.message)}}" alt="">
+                        </div>
+                        <div class="row" *ngIf="isEmoji(message.message)">
+                            <p [innerHtml]="messageToEmojiWithMsg(message.message)">
+                            </p>
+                        </div>
+                        <div class="chat_time {{message.from_who == user ? 'pull-right' : 'pull-left'}}" style="font-size: 10px; margin: -5px; padding: 0px">{{type == 'user' ? '' : message.from_who + ' - '}} {{message.sent | date:"MM/dd/yy hh:mm"}}</div>
                     </div>
                 </li>
             </ul>
@@ -45,48 +58,5 @@
     </div>
 </div>
 <!--message_section-->
-<a href="#lastMessage" id="setFocusOnLastMessage" hidden>Go To Middle</a>
-
-<div class="modal fade" id="newMessage" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Send a new message</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" (ngSubmit)="sendNewMessage()">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">To: </label>
-                        <div class="col-sm-9">
-                            <input [(ngModel)]="model.to_who" [ngModelOptions]="{standalone: true}" type="email" placeholder="someone@server.com" class="form-control"
-                                required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Message: </label>
-                        <div class="col-sm-9">
-                            <textarea rows="5" class="form-control" [(ngModel)]="model.message" [ngModelOptions]="{standalone: true}" placeholder="Type your message here"
-                                required></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="closeModal" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <input type="submit" class="btn btn-success" value="Send">
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 <!-- /.modal -->
 <toaster-container></toaster-container>
-
-<script type="text/javascript">
-    window.onload = function() {
-        document.getElementById("lastMessage").scrollHeight;
-    };
-</script>

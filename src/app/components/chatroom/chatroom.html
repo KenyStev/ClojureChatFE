@@ -1,3 +1,9 @@
+<style type="text/css" media="screen">
+	.current-chat{
+		background-color: #34495E;
+	}	
+</style>
+
 <div class="container">
 	<div class="main_section">
 		<div class="chat_container">
@@ -14,8 +20,8 @@
 					</div>
 					<div class="member_list">
 						<ul class="list-unstyled">
-							<li class="left clearfix" *ngFor="let user of messages_with">
-								<a (click)="selected = user.email" style="text-decoration: none">
+							<li class="left clearfix {{selected == user.email ? 'current-chat' : ''}}" *ngFor="let user of messages_with">
+								<a (click)="selected = user.email; type= user.type" style="text-decoration: none">
 								<span class="chat-img pull-left">
 									<img src="assets/img/user.png" alt="User Avatar" class="img-circle">
 								</span>
@@ -30,7 +36,7 @@
 					</div></div>
 				</div>
 				<!--chat_sidebar-->
-				<msg-stand-cmp [user]="me" [friend]="selected"></msg-stand-cmp>
+				<msg-stand-cmp [user]="me" [friend]="selected" [type]="type"></msg-stand-cmp>
 
 				
 			</div>

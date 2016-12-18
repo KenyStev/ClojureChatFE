@@ -1,0 +1,56 @@
+<div class="container">
+	<h4 style="text-align: center; margin-bottom: 20px">Emojis</h4>
+
+	<div class="row RoomContainer">	
+		<h6>Create new Emoji:</h6>
+		<form class="form-horizontal" (ngSubmit)="createEmoji()">
+			<div class="form-group col-md-12">
+				<label class="col-md-2 control-label" style="text-align: left">Emoji name:</label>
+				<div class="col-md-6">
+					<input placeholder="Type the name" [(ngModel)]="model.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" required>
+				</div>
+			</div>
+
+			<div class="form-group col-md-12">
+				<label class="col-md-2 control-label" style="text-align: left">Emoji (Image):</label>
+				<div class="col-md-6 input-group image-preview" style="margin-bottom: 10px">
+					<input type="text" class="form-control image-preview-filename" [(ngModel)]="img" [ngModelOptions]="{standalone: true}" disabled="disabled" required> <!-- don't give a name === doesn't send on POST/GET -->
+					<span class="input-group-btn">
+						<div class="btn btn-default image-preview-input">
+							<span class="glyphicon glyphicon-folder-open"></span>
+							<span class="image-preview-input-title">Browse</span>
+							<input #img_val type="file" (change)="setImage(img_val.files[0])" accept="image/png, image/jpeg, image/gif" name="profileImage" class="btn btn-inverse" required/> <!-- rename it -->
+						</div>
+					</span>
+				</div>
+			</div>
+			<div class="col-md-2 col-md-offset-3">
+				<input type="submit" class="btn btn-primary" value="Create">
+			</div>
+		</form>
+	</div>
+
+	<div class="row RoomContainer">	
+		<h6>Created Emojis:</h6>
+		<div class="row demo-swatches-row">
+			<div class="swatches-col" *ngFor="let emoji of emojis">
+				<div class="pallete-item" style="background-color: #ECF0F1; border-top-left-radius: 10px; border-top-right-radius: 10px">
+					<dl class="palette" style="color: black; background-color: #BDC3C7; border-top-left-radius: 10px; border-top-right-radius: 10px">
+						<dd>
+							<img src="http://localhost:8000/emojis/image/{{emoji.name}}" width="100%" alt="">
+						</dd>
+					</dl>
+					<dl class="palette" style="color: black; text-align: center">
+						<dd>({{emoji.name}})</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<!--
+		<div *ngFor="let room of myCreatedRooms">
+			<div class="col-md-2">
+				<button class="btn-lg btn-inverse" (click)="showRoom(room.name)" style="width: 100%">{{room.name}}</button>
+			</div>
+		</div>-->
+	</div>
+</div>

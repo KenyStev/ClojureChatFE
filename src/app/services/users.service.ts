@@ -72,4 +72,30 @@ export class UsersService{
   		return this._http.get('http://localhost:8000/chats/' + email, {headers: headers})
   			.map(res => {return res.json()})
     }
+
+    updateProfileImage(email: string, img: File){
+    	return Observable.fromPromise(
+    		new Promise((resolve, reject) => {
+
+    			let xhr = new XMLHttpRequest();
+		    	let params = new FormData();
+				params.append('email', email);
+				params.append('profileImage', img, img.name);
+
+				xhr.onreadystatechange = function () {
+		            if (xhr.readyState === 4) {
+		                if (xhr.status === 200) {
+		                    resolve(xhr.response)
+		                } else {
+		                    reject(xhr.response)
+		                }
+		            }
+		        }
+
+				xhr.open("POST", 'http://localhost:8000/user/update-picture', true);
+				xhr.send(params);
+
+    		})
+    		).map(res => {return res});
+    }
 }

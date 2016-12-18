@@ -24,7 +24,13 @@
   <link rel="stylesheet" type="text/css" href="assets/css/toaster.css" />
   <script src="assets/js/jquery-1.11.1.js"></script>
   <script src="assets/js/flat-ui.js"></script>
-  
+  <script type="text/javascript">
+    window.onload = function() {
+        $('.dropdown-toggle').dropdown();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+    };
+  </script>
 
 
 </head>

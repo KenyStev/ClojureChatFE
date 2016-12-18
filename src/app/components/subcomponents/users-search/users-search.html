@@ -6,7 +6,7 @@
     background-color: #2f4154; 
     width: 450px; 
     color: white; 
-    z-index: 10; 
+    z-index: 99999; 
     border-bottom-left-radius: 5px; 
     border-bottom-right-radius: 5px
   }  
@@ -14,14 +14,15 @@
 
 <div [hidden]="searched == ''" class="users-search">
 	<div class="col-md-12" style="margin-bottom: 5px; border-bottom: 2px solid #2ECC71" *ngFor="let user of users | filtere: searched">
-		<div class="col-md-4">
-			<img src="assets/img/user.png" width="100%" />
+		<div *ngIf="user.email != session.email" class="col-md-4">
+			<img src="http://localhost:8000/profile-picture/{{user.email}}" class="img-responsive img-circle" style="border: 5px solid #BDC3C7">
 		</div>
-		<div class="col-md-8">
+		<div *ngIf="user.email != session.email" class="col-md-8">
 			<h6>{{user.realname}} [{{user.username}}]</h6>
-			<a style="padding: 4px" [routerLink]="['/profile']">Add</a>
-			<a style="padding: 4px" [routerLink]="['/profile']">Message</a>
-			<a style="padding: 4px" [routerLink]="['/profile', user.email]">Profile</a>
+			<a style="padding: 4px" id="withPointer" (click)="addFriend(user.email)">Add</a>
+			<a style="padding: 4px" id="withPointer" (click)="newMessage(user.email)">Message</a>
+			<a style="padding: 4px" id="withPointer" [routerLink]="['/profile', user.email]">Profile</a>
 		</div>
 	</div>
 </div>
+<toaster-container></toaster-container>

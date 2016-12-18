@@ -1,3 +1,21 @@
+.tiny{
+	margin-right: 5px; margin-left: 5px; margin-bottom: 5px; max-width: 5%;
+}
+
+.RoomContainer{
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+#withPointer{
+  	cursor: pointer;
+  }
+
+.router-link-active{
+	background-color: #2C3E50;
+	border-radius: 10px;
+}
+
 .image-preview-filename{
 	color: black;
 }
@@ -285,7 +303,7 @@ input:required:invalid, input:focus:invalid {
 	border-bottom:none;
 }
 .member_list {
-	height: 447px;
+	height: 797px;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
@@ -328,7 +346,7 @@ input:required:invalid, input:focus:invalid {
 }
 .chat_area {
 	float: left;
-	height: 300px;
+	height: 550px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	width: 100%;

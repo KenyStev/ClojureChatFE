@@ -10,6 +10,7 @@ export class ChatroomComponent implements OnInit {
 	public messages_with = [];
 	public me: string = "";
 	public selected: string = "none";
+	public type : string = "user";
 
 	constructor(private _users: UsersService, private _session: SessionService) { }
 
