@@ -51,4 +51,14 @@ export class ProfileComponent implements OnInit {
 		);
 	}
 
+	deleteFriend(id: string){
+		this._friends.delete(id).subscribe(
+			res => {
+				this._toaster.pop("success", "", "Friend deleted");
+				this.ngOnInit();
+			}, 
+			err => {this._toaster.pop("error", "", "Error deleting friend")}
+		);
+	}
+
 }

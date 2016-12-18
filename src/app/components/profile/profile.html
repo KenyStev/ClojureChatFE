@@ -43,6 +43,7 @@
 				<a *ngIf="model.email != session.email" style="padding: 4px" (click)="addNewFriend(friend.email)" id="withPointer">Add</a>
 				<a style="padding: 4px" id="withPointer">Message</a>
 				<a style="padding: 4px" [routerLink]="['/profile', friend.email]">Profile</a>
+				<a *ngIf="model.email == session.email" style="padding: 4px" (click)="deleteFriend(friend.friend_id)" id="withPointer">Delete</a>
 			</div>
 		</div>
 	</div>
