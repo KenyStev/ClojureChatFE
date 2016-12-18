@@ -5,6 +5,7 @@ import {FriendsService} from '../../services/friends.service';
 import {User, Friend, Friendship} from '../../structures/structures';
 import {ActivatedRoute} from '@angular/router';
 import {ToasterService} from 'angular2-toaster/angular2-toaster';
+import {EventsEmitter} from '../../services/event-emitter.service';
 
 @Component({
 	selector: 'profile-cmp',
@@ -16,7 +17,8 @@ export class ProfileComponent implements OnInit {
 	public friends = [];
 	public email : string;
 
-	constructor(private _users: UsersService, private _session: SessionService, private _params: ActivatedRoute, private _friends: FriendsService, private _toaster : ToasterService) { 
+	constructor(private _users: UsersService, private _session: SessionService, private _params: ActivatedRoute, 
+		private _friends: FriendsService, private _toaster : ToasterService, private _emitter : EventsEmitter) { 
 		this.model = new User('','','','');
 	}
 
@@ -30,6 +32,13 @@ export class ProfileComponent implements OnInit {
 		this.session = this._session.getSession();
 		this._friends.getAll(this.email).subscribe(
 			res => {this.friends = res}
+		);
+		this._emitter.getFriendsEvents().subscribe(
+			res => {
+				this._friends.getAll(this.email).subscribe(
+					res => {this.friends = res}
+				);
+			}
 		);
 	}
 
@@ -55,7 +64,6 @@ export class ProfileComponent implements OnInit {
 		this._friends.delete(id).subscribe(
 			res => {
 				this._toaster.pop("success", "", "Friend deleted");
-				this.ngOnInit();
 			}, 
 			err => {this._toaster.pop("error", "", "Error deleting friend")}
 		);

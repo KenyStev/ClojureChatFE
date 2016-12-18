@@ -2,6 +2,7 @@
  * Angular 2 decorators and services
  */
 import { Component, ViewEncapsulation } from '@angular/core';
+import {ToasterConfig} from 'angular2-toaster';
 
 //import { AppState } from './app.service';
 
@@ -15,11 +16,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
   template: `	<nav-cmp></nav-cmp>
   				<router-outlet></router-outlet>
   				<new-msg-cmp></new-msg-cmp>
+  				<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
              `,
   styleUrls: ['../assets/css/flat-ui.css']
 })
 export class AppComponent {
-
+	public toasterconfig : ToasterConfig = 
+    new ToasterConfig({limit: 5, showCloseButton: true, timeout: 1000});
 }
 
 /*

@@ -7,6 +7,8 @@ import {Observable} from 'rxjs/Observable';
 export class EventsEmitter{
 	private sessionChange: Subject<string> = new Subject<string>();
 	private toChange: Subject<string> = new Subject<string>();
+
+	private friendsChange: Subject<string> = new Subject<string>();
 	
 	constructor(){
 
@@ -26,5 +28,13 @@ export class EventsEmitter{
 
 	getToEvent(){
 		return this.toChange.asObservable();
+	}
+
+	createFriendEvent(name: string){
+		this.friendsChange.next(name);
+	}
+
+	getFriendsEvents(){
+		return this.friendsChange.asObservable();
 	}
 }

@@ -12,7 +12,7 @@
 				<div class="row">
 					<div id="custom-search-input">
 						<div class="input-group col-md-12">
-							<input type="text" class="  search-query form-control" placeholder="Conversation" />
+							<input type="text" [(ngModel)]="filt" [ngModelOptions]="{standalone: true}" class="search-query form-control" placeholder="Conversation" />
 							<button class="btn btn-danger" type="button">
 								<span class=" glyphicon glyphicon-search"></span>
 							</button>
@@ -20,7 +20,7 @@
 					</div>
 					<div class="member_list">
 						<ul class="list-unstyled">
-							<li class="left clearfix {{selected == user.email ? 'current-chat' : ''}}" *ngFor="let user of messages_with">
+							<li class="left clearfix {{selected == user.email ? 'current-chat' : ''}}" *ngFor="let user of messages_with | filtere: filt">
 								<a (click)="selected = user.email; type= user.type" style="text-decoration: none">
 								<span class="chat-img pull-left">
 									<img src="assets/img/user.png" alt="User Avatar" class="img-circle">
