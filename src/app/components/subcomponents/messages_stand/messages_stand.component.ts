@@ -93,7 +93,12 @@ export class MessagesStandComponent implements OnInit {
     }
 
     messageToImage(message: string){
-        return 'http://localhost:8000/messages/with-image/' + message.replace('/:', '').replace(':/', '');
+        if(message.includes('http')){
+            let temp = message.replace('/:', '');
+            return temp.slice(0,temp.length-2);
+        }
+        else
+            return 'http://localhost:8000/messages/with-image/' + message.replace('/:', '').replace(':/', '');
     }
 
     isEmoji(message : string){
@@ -109,7 +114,10 @@ export class MessagesStandComponent implements OnInit {
     messageToEmojiWithMsg(message : string){
         //let regex = /.*\(.*\).*/i;
         let ret = message;
-        ret = message.replace(/\(/g, `<img class="tiny" src='http://localhost:8000/emojis/image/`);
+        if(ret.includes('http'))
+            ret = message.replace(/\(/g, `<img class="tiny" src='`);
+        else
+            ret = message.replace(/\(/g, `<img class="tiny" src='http://localhost:8000/emojis/image/`);
         ret = ret.replace(/\)/g, "'>");
         //console.log(ret);
         return ret;
